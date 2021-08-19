@@ -1,0 +1,7 @@
+influxdb_client==1.19.0
+jupyter
+pandas
+matplotlib
+seaborn
+pyspark[sql]
+onnxmltools
