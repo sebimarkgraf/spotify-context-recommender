@@ -16,6 +16,7 @@ import { Tags, EventRecorder } from "./types";
 import { TimeBuffer, ValueStore } from "./time-buffer";
 import { Model } from "./inference";
 import { SpotifyPanel } from "./SpotifyPanel";
+import { requestIOSPermissions } from "./util";
 
 interface State {
   recording: boolean;
@@ -53,7 +54,11 @@ export default class App extends React.Component<{}, State> {
   inferenceCallback = (values: ValueStore) => {
     if (this.model === undefined) return;
     const features = this.model.calculate_features(values);
-    this.model.infer(features).then(outputs => console.log(outputs))
+    this.model.infer(features).then(outputs => {
+      if (outputs !== undefined) {
+        this.setState({"activity": outputs});
+      }
+    });
   }
 
   record = (
@@ -77,12 +82,11 @@ export default class App extends React.Component<{}, State> {
 
   devicemotion_listener(evt: DeviceMotionEvent) {
     const { timeStamp, type } = evt;
-    const { x: x0, y: y0, z: z0 } = evt.acceleration!;
     const { x, y, z } = evt.accelerationIncludingGravity!;
     const { alpha, beta, gamma } = evt.rotationRate!;
     this.record(
       type,
-      { x0, y0, z0, x, y, z, alpha, beta, gamma },
+      { x, y, z, alpha, beta, gamma },
       {},
       timeStamp
     );
@@ -107,23 +111,11 @@ export default class App extends React.Component<{}, State> {
 
     console.log("Loading Model");
     this.model = Model.getInstance();
-    console.log(this.model)
+    console.log("Model loaded")
 
     // Handle iOS Permissions
-    if (typeof DeviceMotionEvent.requestPermission === "function") {
-      const granted = await DeviceMotionEvent.requestPermission();
-      if (granted !== "granted") {
-        console.error("Device Motion Permission not granted!");
-        return;
-      }
-    }
-
-    if (typeof DeviceOrientationEvent.requestPermission === "function") {
-      const granted = await DeviceOrientationEvent.requestPermission();
-      if (granted !== "granted") {
-        console.error("DeviceOrientation Permission not granted!");
-        return;
-      }
+    if (!await requestIOSPermissions()) {
+      return;
     }
 
     for (const listener of this.event_listener) {
@@ -136,7 +128,6 @@ export default class App extends React.Component<{}, State> {
   };
 
   render() {
-
     return (
       <div className={"root"}>
         <Container maxWidth="sm" className="content">
@@ -165,7 +156,7 @@ export default class App extends React.Component<{}, State> {
             <div>Recorded Events: {this.state.recordedEvents}</div>
             <div>Current Activity: {this.state.activity}</div>
           </Box>  
-          <SpotifyPanel playlists={[]}/>
+          <SpotifyPanel/>
         </Container>
         <footer>
           <Copyright />
