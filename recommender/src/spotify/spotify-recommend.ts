@@ -1,4 +1,4 @@
-import { SpotifyConfig } from './config';
+import { SpotifyConfig } from '../configs/config';
 import SpotifyWebApi from 'spotify-web-api-node';
 // @ts-ignore
 import SpotifyWebApiServer from 'spotify-web-api-node/src/server-methods';

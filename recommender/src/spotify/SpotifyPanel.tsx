@@ -27,10 +27,8 @@ export const SpotifyPanel = (props: Props) => {
     }
 
     return (<Box>
-        <Typography variant="h3">Spotify</Typography>
-        <Typography variant="subtitle1">Playlist Recommender</Typography>
         <Button variant="contained" color="primary" onClick={() => searchPlaylists()}>Search Playlists</Button>
-        {playlists.length == 0 ? <EmptyPanel /> : <PlaylistPanel playlists={playlists} onPlaylistClick={onClick}/>}
+        {playlists.length === 0 ? <EmptyPanel /> : <PlaylistPanel playlists={playlists} onPlaylistClick={onClick}/>}
     </Box>
     )
 }

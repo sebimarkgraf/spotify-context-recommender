@@ -1,5 +1,5 @@
 import { Tensor, InferenceSession } from "onnxruntime-web";
-import { indexToLabel, InferenceConfig } from "./config";
+import { indexToLabel, InferenceConfig } from "../configs/config";
 import { ValueStore } from "./time-buffer";
 
 

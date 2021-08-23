@@ -7,3 +7,9 @@ export interface Tags {
     function: any;
   }
   
+
+export interface AppState {
+  recording: boolean;
+  recordedEvents: number;
+  activity: string;
+}

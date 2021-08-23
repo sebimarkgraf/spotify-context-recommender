@@ -3,29 +3,21 @@ import * as React from "react";
 
 import {
   CssBaseline,
-  MenuItem,
   Container,
-  Typography,
-  FormControlLabel,
-  Switch,
-  Box
+  ThemeProvider
 } from "@material-ui/core";
-import Copyright from "./Copyright";
+import Footer from "./Components/Footer";
 
 
-import { Tags, EventRecorder } from "./types";
-import { TimeBuffer, ValueStore } from "./time-buffer";
-import { Model } from "./inference";
-import { SpotifyPanel } from "./SpotifyPanel";
+import { Tags, EventRecorder, AppState } from "./types";
+import { TimeBuffer, ValueStore } from "./inference/time-buffer";
+import { Model } from "./inference/inference";
+import { SpotifyPanel } from "./spotify/SpotifyPanel";
 import { requestIOSPermissions } from "./util";
+import { theme } from "./configs/theme";
+import { TopBar } from "./Components/TopBar";
 
-interface State {
-  recording: boolean;
-  recordedEvents: number;
-  activity: string;
-}
-
-export default class App extends React.Component<{}, State> {
+export default class App extends React.Component<{}, AppState> {
   event_listener: EventRecorder[];
   timebuffer: TimeBuffer;
   model: Model | undefined = undefined;
@@ -130,41 +122,21 @@ export default class App extends React.Component<{}, State> {
 
   render() {
     return (
+      <ThemeProvider theme={theme}>
       <CssBaseline>
-      <div className={"root"}>
-        <Container maxWidth="sm" className="content">
-          <Typography variant="h2" component="h1" gutterBottom>
-            Recommender
-          </Typography>
+       
 
-          <Box bgcolor="lightgrey" border="1 px solid grey" padding="10px">
-            <Typography variant="h3">Controls</Typography>
-            <FormControlLabel
-              control={
-                <Switch
-                  size="small"
-                  checked={this.state.recording}
-                  onChange={() => {
-                    if (this.state.recording) {
-                      this.stopRecording();
-                    } else {
-                      this.startRecording();
-                    }
-                  }}
-                />
-              }
-              label="Recording"
-            />
-            <div>Recorded Events: {this.state.recordedEvents}</div>
-            <div>Current Activity: {this.state.activity}</div>
-          </Box>  
+      <div className={"root"}>
+        <TopBar state={this.state} startRecording={this.startRecording} stopRecording={this.stopRecording} />
+        <Container className="content">
+          <SpotifyPanel activity={this.state.activity}/>
         </Container>
-        <SpotifyPanel activity={this.state.activity}/>
-        <footer>
-          <Copyright />
-        </footer>
+        <Footer />
       </div>
+
       </CssBaseline>
+
+      </ThemeProvider>
     );
   }
 }

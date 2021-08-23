@@ -22,4 +22,6 @@ export const SpotifyConfig = {
   clientSecret: '***REMOVED***'
 }
 
-
+export const externalLinks = {
+  "repository": "https://github.com/sebimarkgraf/ks-context-recommender"
+}
