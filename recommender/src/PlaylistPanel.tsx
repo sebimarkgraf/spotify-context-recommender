@@ -1,32 +1,68 @@
+import { IconButton, ImageList, ImageListItem, ImageListItemBar, makeStyles } from "@material-ui/core";
 
-interface Playlist {
-    id: number;
+export interface Playlist {
+    id: string;
+    name: string;
+    description: string;
+    images: any[];
+    tracks: any[];
+    owner: any;
+    uri: string;
+    href: string;
+    external_urls: {
+        spotify: string;
+    }
 }
 
 
-export const PlaylistItem = (props: {key: number, playlist: Playlist, onClick: (id: number) => void}) => {
+const useStyles = makeStyles((theme: any) => ({
+    root: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      justifyContent: 'space-around',
+      overflow: 'hidden',
+      backgroundColor: theme.palette.background.paper,
+    },
+    icon: {
+      color: 'rgba(255, 255, 255, 0.54)',
+    },
+    item: {
+        height: "200px",
+        width: "20%",
+        cursor: "pointer",
+    }
+  }));
+
+export const PlaylistItem = (props: {key: string, playlist: Playlist}) => {
+    const classes = useStyles();
     const {key, playlist} = props;
     return (
-        <li key={key}>
-            <div className="playlist-item">
-                <div className="playlist-item-title">{playlist.id}</div>
-                <div className="playlist-item-subtitle">{playlist.id}</div>
-            </div>
-        </li>
+        <ImageListItem key={key} className={classes.item} onClick={() => window.open(playlist.external_urls.spotify)} >
+            <img src={playlist.images[0].url} alt={playlist.name}/>
+            <ImageListItemBar
+              title={playlist.name}
+              subtitle={<span>{playlist.description}</span>}
+              actionIcon={
+                <IconButton aria-label={`Play ${playlist.name}`} >
+                </IconButton>
+              } />
+        </ImageListItem>
     );
 }
 
 export const PlaylistPanel = (props: {playlists: Playlist[], onPlaylistClick: (id: number) => void}) => {
+    const classes = useStyles();
     const playlists = props.playlists.map(playlist => (
         <PlaylistItem
             key={playlist.id}
-            playlist={playlist}
-            onClick={props.onPlaylistClick} />
+            playlist={playlist}/>
     ));         
 
     return (
-        <ul>
-        {playlists}
-        </ul>
+        <div className={classes.root}>
+            <ImageList>
+                {playlists}
+            </ImageList>
+        </div>
     )
 }

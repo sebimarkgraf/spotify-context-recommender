@@ -29,7 +29,7 @@ export class Model {
     return Model._instance;
   }
 
-  calculate_features(values: ValueStore) {
+  calculate_features(values: ValueStore, timestamp: number) {
 
     Float32Array.from([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
     const features: Features = {};
@@ -41,6 +41,7 @@ export class Model {
       features[`sum_${key}`] = new Tensor(Float32Array.from([value.reduce((a, b) => a + b, 0)]), [1, 1]);
       features[`var_samp_${key}`] = new Tensor(Float32Array.from([Math.sqrt(value.reduce((a, b) => a + b * b, 0) / value.length - mean * mean)]), [1, 1]);
     }
+    features['hourOfDay'] = new Tensor(Float32Array.from([new Date(timestamp).getHours()]), [1, 1]);
     return features;
   }
 
@@ -49,12 +50,18 @@ export class Model {
       console.warn("Model not initialized");
       return;
     }
-    const prediction: any = await this.session.run(features, {logVerbosityLevel: 4});
-    if (prediction === undefined) {
+    try {
+      const prediction: any = await this.session.run(features, {logVerbosityLevel: 4});
+      if (prediction === undefined) {
+        return;
+      }
+      const label = indexToLabel(prediction["prediction"].data[0])
+      return label;
+    } catch (err) {
+      console.warn("Error when predicting " + err)
       return;
     }
-    const label = indexToLabel(prediction["prediction"].data[0])
-    return label;
+    
   }
 }
 

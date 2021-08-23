@@ -2,6 +2,7 @@ import "./styles.css";
 import * as React from "react";
 
 import {
+  CssBaseline,
   MenuItem,
   Container,
   Typography,
@@ -51,9 +52,9 @@ export default class App extends React.Component<{}, State> {
   }
 
 
-  inferenceCallback = (values: ValueStore) => {
+  inferenceCallback = (values: ValueStore, timestamp: number) => {
     if (this.model === undefined) return;
-    const features = this.model.calculate_features(values);
+    const features = this.model.calculate_features(values, timestamp);
     this.model.infer(features).then(outputs => {
       if (outputs !== undefined) {
         this.setState({"activity": outputs});
@@ -129,6 +130,7 @@ export default class App extends React.Component<{}, State> {
 
   render() {
     return (
+      <CssBaseline>
       <div className={"root"}>
         <Container maxWidth="sm" className="content">
           <Typography variant="h2" component="h1" gutterBottom>
@@ -156,12 +158,13 @@ export default class App extends React.Component<{}, State> {
             <div>Recorded Events: {this.state.recordedEvents}</div>
             <div>Current Activity: {this.state.activity}</div>
           </Box>  
-          <SpotifyPanel/>
         </Container>
+        <SpotifyPanel activity={this.state.activity}/>
         <footer>
           <Copyright />
         </footer>
       </div>
+      </CssBaseline>
     );
   }
 }

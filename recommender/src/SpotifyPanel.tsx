@@ -1,16 +1,36 @@
 import { Box, Button, Typography } from "@material-ui/core"
-import { PlaylistPanel } from "./PlaylistPanel"
+import { useState } from "react";
+import { PlaylistPanel, Playlist } from "./PlaylistPanel"
+import { SpotifyRecommender } from "./spotify-recommend";
 
 
-export const SpotifyPanel = (props: any) => {
-    const playlists: any[] = [];
+interface Props {
+    activity: string;
+}
+
+export const EmptyPanel = () => {
+
+    return <div>Perform Activity and Search!</div>
+}
+
+export const SpotifyPanel = (props: Props) => {
     const onClick = (id: number) => console.log(id)
+    const recommender = SpotifyRecommender.getInstance();
 
-    return (<Box padding="10px">
+    const [playlists, setPlaylists] = useState<Playlist[]>([]);
+    const searchPlaylists = ()  => {
+        recommender.getPlaylists(props.activity).then(data => {
+            const playlists = data.body.playlists.items;
+            console.log(playlists);
+            setPlaylists(playlists);
+        });
+    }
+
+    return (<Box>
         <Typography variant="h3">Spotify</Typography>
         <Typography variant="subtitle1">Playlist Recommender</Typography>
-        <Button variant="contained" color="primary">Search Playlists</Button>
-        <PlaylistPanel playlists={playlists} onPlaylistClick={onClick}/>
+        <Button variant="contained" color="primary" onClick={() => searchPlaylists()}>Search Playlists</Button>
+        {playlists.length == 0 ? <EmptyPanel /> : <PlaylistPanel playlists={playlists} onPlaylistClick={onClick}/>}
     </Box>
     )
 }

@@ -2,13 +2,15 @@ export interface ValueStore {
     [key: string]: number[];
 }
 
+export type InferenceCallback = (values: ValueStore, timestamp: number) => void;
+
 export class TimeBuffer {
     private values: ValueStore;
     private timeWindow: number;
-    private callback: (values: ValueStore) => void;
+    private callback: InferenceCallback;
     timer: NodeJS.Timeout;
 
-    constructor(timeWindow: number, callback: (values: ValueStore) => void) {
+    constructor(timeWindow: number, callback: InferenceCallback) {
         this.timeWindow = timeWindow;
         this.values = {};
         this.callback = callback;
@@ -25,7 +27,7 @@ export class TimeBuffer {
 
     flush() {
         if (Object.keys(this.values).length === 0) return;
-        this.callback(this.values);
+        this.callback(this.values, Date.now());
         this.values = {};
     }
 }
