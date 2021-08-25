@@ -23,5 +23,5 @@ export const SpotifyConfig = {
 }
 
 export const externalLinks = {
-  "repository": "https://github.com/sebimarkgraf/ks-context-recommender"
+  "repository": "https://github.com/sebimarkgraf/spotify-context-recommender"
 }
