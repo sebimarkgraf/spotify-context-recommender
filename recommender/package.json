@@ -2,6 +2,7 @@
   "name": "recommender",
   "version": "0.1.0",
   "private": true,
+  "homepage": "/spotify-context-recommender",
   "dependencies": {
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
@@ -13,6 +14,7 @@
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "copy-webpack-plugin": "^6.0.1",
+    "gh-pages": "^3.2.3",
     "onnxruntime-web": "^1.8.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -25,7 +27,9 @@
     "wasm": "mkdir -p public/static/js && cp node_modules/onnxruntime-web/dist/*.wasm ./public/static/js",
     "start": "yarn wasm && HTTPS=true react-scripts start",
     "build": "yarn wasm && react-scripts build",
-    "test": "react-scripts test"
+    "test": "react-scripts test",
+    "predeploy": "yarn run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [

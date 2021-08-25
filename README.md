@@ -1,5 +1,7 @@
 # KS-Context Recommender
 
+The deployed version can be found [here](https://sebimarkgraf.de/spotify-context-recommender/)
+
 This project was done for the lecture "Kontextsensitive Systeme 2021" at KIT.
 The idea lies in creating a full stack from recording the events during context, through training a classifier and finally integrating the 
 context classifier into a working application.
@@ -41,7 +43,7 @@ But the biggest weakpoint was installing additional packages as the onnxmltools 
 ## ToDO
 - [ ] Enhance Activity Recognition through data gathering
 - [ ] Make sure classes are balanced in train / test set
-- [ ] Deploy the final application, e.g. on GitHub Pages
+- [X] Deploy the final application, e.g. on GitHub Pages
 - [ ] Deploy the collector using GitHub Pages or similar
 - [ ] Integrate Feature Calculation into Spark Pipeline as Transformer
 
