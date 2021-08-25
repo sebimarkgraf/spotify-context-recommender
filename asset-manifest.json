@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/spotify-recommender/static/css/main.c6bbab23.chunk.css",
-    "main.js": "/spotify-recommender/static/js/main.a80bead7.chunk.js",
-    "main.js.map": "/spotify-recommender/static/js/main.a80bead7.chunk.js.map",
-    "runtime-main.js": "/spotify-recommender/static/js/runtime-main.7f38990f.js",
-    "runtime-main.js.map": "/spotify-recommender/static/js/runtime-main.7f38990f.js.map",
-    "static/js/2.46e473b1.chunk.js": "/spotify-recommender/static/js/2.46e473b1.chunk.js",
-    "static/js/2.46e473b1.chunk.js.map": "/spotify-recommender/static/js/2.46e473b1.chunk.js.map",
-    "static/js/3.14150b7a.chunk.js": "/spotify-recommender/static/js/3.14150b7a.chunk.js",
-    "static/js/3.14150b7a.chunk.js.map": "/spotify-recommender/static/js/3.14150b7a.chunk.js.map",
-    "index.html": "/spotify-recommender/index.html",
-    "static/css/main.c6bbab23.chunk.css.map": "/spotify-recommender/static/css/main.c6bbab23.chunk.css.map",
-    "static/js/2.46e473b1.chunk.js.LICENSE.txt": "/spotify-recommender/static/js/2.46e473b1.chunk.js.LICENSE.txt"
+    "main.css": "/spotify-context-recommender/static/css/main.c6bbab23.chunk.css",
+    "main.js": "/spotify-context-recommender/static/js/main.a80bead7.chunk.js",
+    "main.js.map": "/spotify-context-recommender/static/js/main.a80bead7.chunk.js.map",
+    "runtime-main.js": "/spotify-context-recommender/static/js/runtime-main.ff750a83.js",
+    "runtime-main.js.map": "/spotify-context-recommender/static/js/runtime-main.ff750a83.js.map",
+    "static/js/2.46e473b1.chunk.js": "/spotify-context-recommender/static/js/2.46e473b1.chunk.js",
+    "static/js/2.46e473b1.chunk.js.map": "/spotify-context-recommender/static/js/2.46e473b1.chunk.js.map",
+    "static/js/3.14150b7a.chunk.js": "/spotify-context-recommender/static/js/3.14150b7a.chunk.js",
+    "static/js/3.14150b7a.chunk.js.map": "/spotify-context-recommender/static/js/3.14150b7a.chunk.js.map",
+    "index.html": "/spotify-context-recommender/index.html",
+    "static/css/main.c6bbab23.chunk.css.map": "/spotify-context-recommender/static/css/main.c6bbab23.chunk.css.map",
+    "static/js/2.46e473b1.chunk.js.LICENSE.txt": "/spotify-context-recommender/static/js/2.46e473b1.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.7f38990f.js",
+    "static/js/runtime-main.ff750a83.js",
     "static/js/2.46e473b1.chunk.js",
     "static/css/main.c6bbab23.chunk.css",
     "static/js/main.a80bead7.chunk.js"
