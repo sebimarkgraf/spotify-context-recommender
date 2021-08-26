@@ -16,6 +16,7 @@ import { SpotifyPanel } from "./spotify/SpotifyPanel";
 import { requestIOSPermissions } from "./util";
 import { theme } from "./configs/theme";
 import { TopBar } from "./Components/TopBar";
+import { InferenceConfig } from "./configs/config";
 
 export default class App extends React.Component<{}, AppState> {
   event_listener: EventRecorder[];
@@ -40,7 +41,7 @@ export default class App extends React.Component<{}, AppState> {
     ];
     
 
-    this.timebuffer = new TimeBuffer(1000, this.inferenceCallback)
+    this.timebuffer = new TimeBuffer(InferenceConfig["timeWindow"], this.inferenceCallback)
   }
 
 

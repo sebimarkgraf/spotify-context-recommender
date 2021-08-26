@@ -9,7 +9,8 @@ export const Labels = [
   
 
 export const InferenceConfig = {
-  "model": "ks_context.onnx"
+  model: `${window.location.href}/ks_context.onnx`,
+  timeWindow: 2000, 
 }
 
 export const indexToLabel = (index: number) => {

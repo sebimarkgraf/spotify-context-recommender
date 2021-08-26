@@ -4,4 +4,4 @@ pandas
 matplotlib
 seaborn
 pyspark[sql]
-onnxmltools
+onnxmltools==1.9.1

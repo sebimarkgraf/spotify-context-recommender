@@ -47,7 +47,7 @@ But the biggest weakpoint was installing additional packages as the onnxmltools 
 
 ## ToDO
 - [ ] Enhance Activity Recognition through data gathering
-- [ ] Make sure classes are balanced in train / test set
+- [X] Make sure classes are balanced in train / test set --> Introduced CV
 - [X] Deploy the final application, e.g. on GitHub Pages
 - [ ] Deploy the collector using GitHub Pages or similar
 - [ ] Integrate Feature Calculation into Spark Pipeline as Transformer
