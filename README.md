@@ -4,12 +4,6 @@ This project was done for the lecture "Kontextsensitive Systeme 2021" at KIT.
 The idea lies in creating a full stack from recording the events during context, through training a classifier and finally integrating the 
 context classifier into a working application.
 
-## Links
-
-The deployed recommender can be found [here](https://sebimarkgraf.de/spotify-context-recommender/).
-The event recorder can be accessed on [codesandbox](https://8og7k.csb.app/).
-The Influx DB is the influx db of the [lecture](https://css21.teco.edu).
-
 
 ## Idea
 Finding the right music to your current activity is always a tedious process and involves clicking through potentially a big amount of spotify submenus.
